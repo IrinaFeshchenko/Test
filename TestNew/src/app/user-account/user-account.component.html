@@ -1,0 +1,71 @@
+<blockquote class="blockquote ml-5" >
+    <h2>User Accounts</h2>
+</blockquote>
+
+<div class="grid-table">
+    <div class="thead">
+        <div class="tr">
+            <div class="td">Id</div>
+            <div class="td">Name</div>
+            <div class="td">Active</div>
+        </div>
+    </div>
+    <div class="tbody">
+        <form class="tr" [formGroup]="$any(fg)" *ngFor="let fg of userAccountForms.controls; let i=index;"(submit)="recordSubmit($any(fg))" style="background-color:lightgrey;">
+            <div class="td">
+                <input class="form-control" formControlName="id" readonly>
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="name" readonly>
+            </div>
+            <div class="td">
+            <div class="form-check align-items-center">
+                <input class="form-check-input position-static" type="checkbox" formControlName="active" ng-model="$any(fg)" (change)="fileChangeEvent($any(fg))">
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="form-group">
+    <div class="form-group"></div>
+<button class="btn btn-outline-dark" 
+    (click)="open(content)" style="width: 220px;"> 
+    Total
+</button> 
+</div>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header"> 
+        <h4 class="modal-title" 
+            id="modal-basic-title"> 
+            Popup header
+        </h4> 
+    </div>
+    <div class="modal-body"></div>
+    <tr *ngFor="let ant of results">
+    <div class="modal-body">
+        <form>
+        <div class="form-group">
+             Total count:   {{ant.totalCount}}
+        </div>
+        <div class="form-group">
+            Active count:   {{ant.activeCount}}
+       </div>
+       </form>
+       <div class="form-row text-center">
+        <div class="col-12">
+            <button type="button" 
+            class="btn btn-outline-dark " 
+            (click)="modal.close('Save click')" style="width: 220px;"> 
+            Close</button>
+        </div>
+        </div>
+    </div>
+    </tr>
+</ng-template>
+  
